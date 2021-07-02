@@ -4,7 +4,7 @@ import "../index.css";
 import "../App.css";
 
 import header_ill from '../header_ill.svg'
-import {BASE_URL, WebServiceRequest} from '../constant'
+import { WebServiceRequest } from '../constant'
 import logo from '../images/logo.png'
 import axios from 'axios';
 
@@ -12,7 +12,7 @@ import axios from 'axios';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import {InputLabel,Select,FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
+import { InputLabel, Select, FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Button, Container, Row, Col, Tabs, Tab, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -52,6 +52,41 @@ export default function SignUp() {
     setIsValid(!isValid)
   }
 
+  let callRestAPIGet = ({
+    url,
+    method = 'GET',
+    data,
+    params,
+    timeout
+  }) => {
+    const options = {
+      method,
+      url,
+      data,
+      params,
+      timeout
+    };
+    return WebServiceRequest.callWebService(options);
+  };
+  
+  let callRestAPIPost = ({
+    url = this.url,
+    method = 'POST',
+    data,
+    params,
+    timeout
+  }) => {
+    const options = {
+      method,
+      url,
+      data,
+      params,
+      timeout
+    };
+    return WebServiceRequest.callWebService(options);
+  };
+
+
   function on_register() {
     var details = {
       "email": email,
@@ -62,7 +97,9 @@ export default function SignUp() {
     };
     console.log("details", details)
 
-    axios.get(BASE_URL+"/user/1", details).then(res => console.log(res)).catch(err => console.log("api err", err))
+    callRestAPIGet(WebServiceRequest.BASE_URL_USER + "/user/1")
+    .then(res => console.log(res))
+    .catch(err => console.log("api err", err))
 
     var formBody = [];
     for (var property in details) {
@@ -72,16 +109,17 @@ export default function SignUp() {
     }
     formBody = formBody.join("&");
 
-    fetch(BASE_URL+"/user/1", {
-      method: 'get',
-      headers: {
-        // 'Authorization': 'Basic YWRtaW46MTIzNA==',
-        'Content-Type': 'application/json',
-        // 'X-API-KEY': 'RfTjWnZr4u7x!A-D' 
-      },
+    callRestAPIPost(WebServiceRequest.BASE_URL_USER + "/user",'POST',
+    details
+        // {
+      // headers: {
+      //   // 'Authorization': 'Basic YWRtaW46MTIzNA==',
+      //   'Content-Type': 'application/json',
+      //   // 'X-API-KEY': 'RfTjWnZr4u7x!A-D' 
+      // },
       // body: formBody
-      // body: JSON.stringify( details )
-    }).then((response) => response.json())
+    // }
+    ).then((response) => response.json())
       .then(async (res) => {
         console.log("clientdata res", res)
       }).catch((error) => {
@@ -262,8 +300,8 @@ export default function SignUp() {
                 </div>
 
                 <div style={{ width: "100%", height: "100%", textAlign: "center", marginTop: "50px" }}>
-                  <UI variant="filled"  style={{ width: "500px" }}
- >
+                  <UI variant="filled" style={{ width: "500px" }}
+                  >
                     <InputLabel htmlFor="filled-age-native-simple">Age</InputLabel>
                     <Select
                       native

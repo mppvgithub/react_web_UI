@@ -15,40 +15,6 @@ const callWebService = (options) => {
 };
 
 
-let callRestAPIGet = ({
-    url,
-    method = 'GET',
-    data,
-    params,
-    timeout
-  }) => {
-    const options = {
-      method,
-      url,
-      data,
-      params,
-      timeout
-    };
-    return WebServiceRequest.callWebService(options);
-  };
-  
-  let callRestAPIPost = ({
-    url = this.url,
-    method = 'POST',
-    data,
-    params,
-    timeout
-  }) => {
-    const options = {
-      method,
-      url,
-      data,
-      params,
-      timeout
-    };
-    return WebServiceRequest.callWebService(options);
-  };
-
 export const WebServiceRequest = {
     callWebService,
     BASE_URL_PRODUCT,
