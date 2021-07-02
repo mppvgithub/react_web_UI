@@ -6,6 +6,7 @@ const BASE_URL_USER = "http://192.168.43.102:4001";
 
 
 const callWebService = (options) => {
+  console.log(options.url)
     const axiosInstance = axios.create({
         baseURL: options.url,
         withCredentials: true,

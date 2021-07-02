@@ -70,7 +70,7 @@ export default function SignUp() {
   };
   
   let callRestAPIPost = ({
-    url = this.url,
+    url,
     method = 'POST',
     data,
     params,
@@ -97,7 +97,7 @@ export default function SignUp() {
     };
     console.log("details", details)
 
-    callRestAPIGet(WebServiceRequest.BASE_URL_USER + "/user/1")
+    callRestAPIGet({ url: WebServiceRequest.BASE_URL_USER + "/user/1"})
     .then(res => console.log(res))
     .catch(err => console.log("api err", err))
 
@@ -109,8 +109,7 @@ export default function SignUp() {
     }
     formBody = formBody.join("&");
 
-    callRestAPIPost(WebServiceRequest.BASE_URL_USER + "/user",'POST',
-    details
+    callRestAPIPost({ url :WebServiceRequest.BASE_URL_USER + "/user", data: details }
         // {
       // headers: {
       //   // 'Authorization': 'Basic YWRtaW46MTIzNA==',
