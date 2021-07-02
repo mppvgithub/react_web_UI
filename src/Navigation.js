@@ -63,7 +63,7 @@ export default function Navigation() {
               <Nav.Link href="About">About</Nav.Link>
               <Nav.Link href="Services">Services</Nav.Link>
               <Nav.Link href="Contact">Contact us</Nav.Link>
-              <Nav.Link href="SignUp">SignUp</Nav.Link>
+              <Nav.Link href="SignUp">SignUp / SignIn</Nav.Link>
             </Nav>
             <input type="text" style={{ borderRadius: 5, backgroundColor: "#d9aef2", height: "40px", marginRight: 5 }} id="filter" placeholder="Search for..." onChange={handleInputChange} value={query} />
             <Button style={{ borderRadius: 5, backgroundColor: "#c469fa", alignItems: "center", justifyContent: "center" }}
