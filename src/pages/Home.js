@@ -9,6 +9,14 @@ import medical1 from '../images/medical1.jpg'
 import medical2 from '../images/medical2.jpg'
 import medical3 from '../images/medical3.jpg'
 import dental from '../images/dental.png'
+import machine from '../images/machine.png'
+import cement from '../images/cement.png'
+import freedom from '../images/freedom.jpg'
+import den_off from '../images/den_off.jpg'
+import client1 from '../images/client1.jpeg'
+import client2 from '../images/client2.jpeg'
+
+
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -38,6 +46,22 @@ export default function Firstscreen() {
         { name: 'item14' }
     ];
 
+    const image_text = [
+        {
+            title: 'Bugatti Chiron Super Sport 300',
+            desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua se Utenim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+        },
+        {
+            title: 'item1',
+            desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua se Utenim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+        },
+        {
+            title: 'item1',
+            desc: "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua se Utenim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+        },
+
+    ];
+
     function alertprimary() {
         setIsValid(!isValid)
     }
@@ -47,7 +71,7 @@ export default function Firstscreen() {
         <Container className="constainer">
 
             {/* <Row style={{ marginTop: "75px", width: "100%", alignItems: "center", justifyContent: "center", height: "200px", backgroundColor: "#c1b3c9" }}> */}
-            <React_Carousel>
+            <React_Carousel >
                 <React_Carousel.Item interval={1000}>
                     <img
                         className="d-block w-100"
@@ -83,13 +107,14 @@ export default function Firstscreen() {
                 </React_Carousel.Item>
             </React_Carousel>
             {/* </Row> */}
-            <div style={{ marginTop: 10 }}>
+            <div style={{ marginTop: "10px", padding: "10px" }} className="hotel-card-scroll">
                 <ScrollMenu
+                    style={{ borderRadius: "10px", marginLeft: "10px", marginRight: "10px" }}
                     // arrowLeft={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" < "}</div>}
                     // arrowRight={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" > "}</div>}
                     wheel={true}
                     data={numberOfPicture.map((picture, index) => (
-                        <Card style={{ width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
+                        <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
                             <div style={{ alignItems: "center", justifyContent: "center", }}>
                                 <img
                                     src={dental}
@@ -103,8 +128,8 @@ export default function Firstscreen() {
                 />
             </div>
 
-            <Row style={{ width: "100%" }}>
-                <div style={{ width: "75%", }}>
+            <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
+                <div style={{ width: "71%", }} className="hotel-card">
                     <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
                         <text style={{ fontSize: 20, color: "red" }}>Consumable & Disposable</text>
                     </div>
@@ -132,7 +157,7 @@ export default function Firstscreen() {
 
                     </div>
                 </div>
-                <div style={{ width: "25%", }}>
+                <div style={{ width: "27%", }} className="hotel-card">
                     <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
                         <text style={{ fontSize: 18, }}>Personal Protection Products</text>
                     </div>
@@ -163,9 +188,9 @@ export default function Firstscreen() {
 
 
             </Row>
-            <div style={{ marginTop: '2rem', backgroundColor: "#c9c4cc" }}>
+            <div className="hotel-card-Carousel" style={{ marginTop: '2rem', backgroundColor: "#003863" }}>
                 <Carousel
-
+                    style={{ alignItems: "center", justifyContent: "center" }}
                     showThumbs={true}
                     showStatus={false}
 
@@ -176,207 +201,229 @@ export default function Firstscreen() {
                     transitionTime={1000}
                     // axis="vertical"
                     selectedItem={1}
-                    interval={1000}
+                    interval={5000}
                     infiniteLoop={true}
                 >
-                    <div>
-                  
-                        <div className="text-container">
-                        <img
-                            src={dental}
-                            style={{ height: "75px", width: "75px" }}
-                            alt="Image"
-                        />
-                            <h2>Bugatti Chiron Super Sport 300</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua se. Ut
-                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat.
-            </p>
-                        </div>
-                    </div>
-                    <div>
-                      
-                        <div className="text-container">
-                        <img
-                            src={dental}
-                            style={{ height: "75px", width: "75px" }}
-                            alt="Image"
-                        />
-                            <h2>Bugatti Chiron Super Sport 300</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua se. Ut
-                                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                nisi ut aliquip ex ea commodo consequat.
-            </p>
-                        </div>
-                    </div>
-                    
+                    {
+                        image_text.map(function (item, index) {
+                            return (
+                                <div style={{ position: "relative", }}>
+                                    <div style={{ alignItems: "center", marginTop: "25px", justifyContent: "center" }}>
+                                        <img
+                                            src={dental}
+                                            style={{ height: "75px", width: "75px" }}
+                                            alt="Image"
+                                        />
+                                        <h2 style={{ color: "#fff" }}>{item.title}</h2>
+                                        <text style={{ paddingLeft: "5px", color: "#fff", paddingRight: "5px", fontSize: 15, textAlign: "center" }}>{item.desc}{item.desc}{item.desc}</text>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
                 </Carousel>
             </div>
 
+            <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
+                <div className="hotel-card">
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                        <text style={{ fontSize: 20, color: "red" }}>Medical Device & Equipment</text>
+                    </div>
+                    <div style={{ marginLeft: '1rem' }}>
+                        <text style={{ fontSize: 15 }}>Advanced Medical Devices and Equipment</text>
+                    </div>
+                    <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
 
+                        {
+                            numberOfPicture.map(function (item) {
+                                return (
+                                    <div className="hotel-card-Equipment">
+                                        <div style={{ margonTop: "6px" }}>
+                                            <img
+                                                src={machine}
+                                                style={{ height: "170px", width: "170px" }}
+                                                alt="Image"
+                                            />
+                                        </div>
+                                        <div style={{ marginTop: "5px" }}>
+                                            <h6 >Oxygen Concentrator</h6>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
 
+                    </div>
+                </div>
+            </Row>
+            <Row style={{ width: "100%", padding: "10px", marginLeft: "5px", marginTop: "10px" }} className="hotel-card-Freedom">
+                <div style={{ width: "33%" }}>
+                    <div>
+                        <h4>MedicOcean - Freedom</h4>
+                    </div>
 
-
-            <Row style={{ paddingTop: "80px" }}>
-                <Col sm={5} >
-                    <Image style={{ height: "180px", width: "180px" }} src={logo} responsive />
-                    <h1 style={{ fontWeight: "bolder", fontSize: "60px" }}>Made with React</h1>
-                    <h6>A collection of websites and applications using the React or React Native JavaScript library.</h6>
-                    <InputGroup style={{ top: "20px" }} className="mb-3">
-                        <FormControl
-                            placeholder="username"
-                            aria-label="username"
-                            aria-describedby="basic-addon2"
+                    <div style={{ marginTop: "15px" }}>
+                        <img className="freedom-image"
+                            src={freedom}
+                            // style={{ height: "170px", width: "99%",  }}
+                            alt="Image"
                         />
-                        <InputGroup.Append>
-                            <InputGroup.Text id="basic-addon2">@ abc company*</InputGroup.Text>
-                        </InputGroup.Append>
-                    </InputGroup>
-                </Col>
-                <Col sm={7} style={{ padding: 0 }}>
-                    <Image style={{ height: "100%", width: "100%" }} src={header_ill} responsive />
-                </Col>
-            </Row>
+                    </div>
 
-            <Row className="centerinput">
-                <InputGroup style={{ width: "500px" }} >
-                    <FormControl
-                        placeholder="username"
-                        aria-label="username"
-                        aria-describedby="basic-addon2"
-                    />
-                    <InputGroup.Append>
-                        <InputGroup.Text id="basic-addon2">@ abc company*</InputGroup.Text>
-                    </InputGroup.Append>
-                </InputGroup>
-            </Row>
-            <Row style={{}}>
-                <Col className="cardbgend">
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col className="cardbg">
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col className="cardbgend">
-                    <Card style={{ width: '18rem', margin: "1rem" }}>
-                        <Card.Body>
-                            <Card.Title>PREMIUM</Card.Title>
-                            <Card.Subtitle className="mb-2 text-muted">Light Bootstrap Dashboard Pro</Card.Subtitle>
-                            <Card.Text>Light Bootstrap Dashboard PRO React is a premium admin dashboard template designed to be beautiful and simple. It is built on top of React Bootstrap, using Light Bootstrap Dashboard PRO and it is fully responsive..</Card.Text>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
-                            </ListGroup>
-                            <Row style={{ flexDirection: "row-reverse", paddingRight: "20px" }}>
-                                <Button variant="outline-primary" style={{ borderRadius: 30, }} >Projects</Button>
-                            </Row>
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-            <Row style={{ height: "10vh", alignItems: "center", justifyContent: "center", marginRight: "8rem" }}>
-                <h5 className="page">PAGE</h5>
-                <Pagination style={{ margin: 0 }}>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis />
 
-                    <Pagination.Item>{10}</Pagination.Item>
-                    <Pagination.Item>{11}</Pagination.Item>
-                    <Pagination.Item active>{12}</Pagination.Item>
-                    <Pagination.Item>{13}</Pagination.Item>
-                    <Pagination.Item disabled>{14}</Pagination.Item>
-
-                    <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>
-            </Row>
-            <Row style={{ height: "30vh", alignItems: "center", justifyContent: "center", }}>
-                <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", display: "flex", width: 150 }}>
-                    <Image style={{ height: "100px", width: "100px" }} src={logo} responsive />
-                    <h5 style={{ textAlign: "center" }} >Vuejs Expo</h5>
                 </div>
-                <div style={{ flexDirection: "column", alignItems: "center", justifyContent: "center", display: "flex", width: 150 }}>
-                    <Image style={{ height: "100px", width: "100px" }} src={logo} responsive />
-                    <h5 >Angular Expo</h5>
+                <div style={{ width: "33%" }}>
+                    <div>
+                        <h4>Xerox Vortran Ventilator</h4>
+                    </div>
+
+                    <div style={{ marginTop: "15px" }}>
+                        <img className="freedom-image"
+                            src={freedom}
+                            // style={{ height: "170px", width: "99%",  }}
+                            alt="Image"
+                        />
+                    </div>
+
+
+                </div>
+                <div style={{ width: "33%" }}>
+                    <div>
+                        <h4>Roche Diagnostic Products</h4>
+                    </div>
+
+                    <div style={{ marginTop: "15px" }}>
+                        <img className="freedom-image"
+                            src={freedom}
+                            // style={{ height: "170px", width: "99%",  }}
+                            alt="Image"
+                        />
+                    </div>
+
+
                 </div>
             </Row>
-            <Row style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+
+            <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
+                <div style={{ width: "71%", }} className="hotel-card">
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                        <text style={{ fontSize: 20, color: "red" }}>Dental</text>
+                    </div>
+                    <div style={{ marginLeft: '1rem' }}>
+                        <text style={{ fontSize: 15 }}>Largest Catalogue of Dental Products</text>
+                    </div>
+                    <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+
+                        {
+                            numberOfPicture.map(function (item, index) {
+                                if (index < 6)
+                                    return (
+                                        <div className="hotel-card-Equipment">
+                                            <div style={{ margonTop: "6px" }}>
+                                                <img
+                                                    src={cement}
+                                                    style={{ height: "170px", width: "220px" }}
+                                                    alt="Image"
+                                                />
+                                            </div>
+                                            <div style={{ marginTop: "5px" }}>
+                                                <h6 >Dental Product</h6>
+                                            </div>
+                                        </div>
+                                    )
+                            })
+                        }
+
+                    </div>
+                </div>
+                <div style={{ width: "27%", }} className="hotel-card">
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                        <text style={{ fontSize: 18, }}>Dental Offer</text>
+                    </div>
+                    <div class="row" style={{ marginTop: '1rem', marginLeft: '0.4rem', }}>
+
+                        {
+                            numberOfPicture.map(function (item, index) {
+                                if (index < 2) {
+                                    return (
+                                        <div className="hotel-card-Equipment">
+
+                                            <img
+                                                className="freedom-image"
+                                                src={den_off}
+                                                style={{ width: "270px" }}
+                                                alt="Image"
+                                            />
+
+                                        </div>
+                                    )
+                                }
+
+                            })
+                        }
+
+                    </div>
+                </div>
+
+
+            </Row>
+            <Row style={{ width: "100%", padding: "10px", marginLeft: "5px", marginTop: "12px", alignItems: "center", justifyContent: "center", flexDirection: "row" }} className="hotel-card-Freedom">
+                <text style={{ fontSize: 30 }}> What Our <text style={{ color: "#474aff" }}> Clients </text> Say About Us </text>
+            </Row>
+            <Row className="hotel-card-clinet-row" style={{ width: "100%", marginLeft: "5px", marginTop: "10px", flexDirection: "row" }}>
+                <Row className="hotel-card-clinet" style={{ width: "50%", padding:"20px" }}>
+                    <div style={{ width: "25%",  textAlign:"center",  }}>
+                        <img
+
+                            src={client1}
+                            style={{marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
+                            alt="Image"
+                        />
+                    </div>
+                    <div style={{ width: "75%", }}>
+                        <div style={{ marginTop: "15px", marginLeft: "15px", }}>
+                            <text style={{ color: "blue", fontSize: 18 }}>Dr. Anil sing</text>
+                        </div>
+                        <div style={{ marginTop: "3px", marginLeft: "15px", }}>
+                            <text style={{ fontSize: 15, marginTop: '5px' }}>Anil mark Imaging, New Delhi</text>
+                        </div>
+
+                        <div style={{ marginTop: "20px",marginBottom:'30px', marginLeft: "15px",marginRight:'10px' }}>
+                            <text style={{ fontSize: 13, marginTop: '5px' }}>MedicOcean is fast emerging as a high end technology aggregator in addition to being a single point of contact for all medical supplies and consumables. We are excited to join hands with MedicOcean for Molecular Imaging products.</text>
+
+                        </div>
+                    </div>
+                </Row>
+                <Row className="hotel-card-clinet" style={{ width: "50%", padding:"20px" }}>
+                    <div style={{ width: "25%",  textAlign:"center",  }}>
+                        <img
+
+                            src={client2}
+                            style={{marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
+                            alt="Image"
+                        />
+                    </div>
+                    <div style={{ width: "75%", }}>
+                        <div style={{ marginTop: "15px", marginLeft: "15px", }}>
+                            <text style={{ color: "blue", fontSize: 18 }}>Dr. Anil sing</text>
+                        </div>
+                        <div style={{ marginTop: "3px", marginLeft: "15px", }}>
+                            <text style={{ fontSize: 15, marginTop: '5px' }}>Anil mark Imaging, New Delhi</text>
+                        </div>
+
+                        <div style={{ marginTop: "20px",marginBottom:'30px', marginLeft: "15px",marginRight:'10px' }}>
+                            <text style={{ fontSize: 13, marginTop: '5px' }}>MedicOcean is fast emerging as a high end technology aggregator in addition to being a single point of contact for all medical supplies and consumables. We are excited to join hands with MedicOcean for Molecular Imaging products.</text>
+
+                        </div>
+                    </div>
+                </Row>
+
+
+            </Row>
+
+
+            <Row style={{ width: "100%", alignItems: "center", justifyContent: "center", marginTop:"20px" }}>
                 <div className="b_div1">
                     <h3 className="b_top" >Made with React</h3>
                     <h6 className="smallfont">A collection of websites and applications using the React or React Native JavaScript library.</h6>

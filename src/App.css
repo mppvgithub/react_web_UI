@@ -138,6 +138,94 @@ header.content.top-sticky {
   max-width: 1300px !important;
   padding: 0px 15px;
 }
+
+.hotel-card {
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 25px;
+  margin: 5px;
+  box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
+}
+
+.hotel-card-clinet{
+  /* justify-content: space-between; */
+  border: 1px solid lightgrey;
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 15px;
+  /* margin: 5px; */
+  box-shadow: 1px 1px 8px 1px rgba(211, 211, 211, 0.5);
+}
+
+.hotel-card-clinet-row{
+  /* flex-direction: column; */
+  justify-content: space-between;
+  /* border: 1px solid lightgrey; */
+  /* height: 650px; */
+  /* width: 340px; */
+  /* border-radius: 25px; */
+  margin: 5px;
+  /* box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5); */
+}
+
+
+.hotel-card-Carousel {
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 25px;
+  margin: 5px;
+  box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
+}
+
+.hotel-card-scroll {
+  padding-left: "500px";
+  padding-right: "500px";
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 25px;
+  /* margin: 5px; */
+  box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
+}
+.hotel-card-Freedom {
+  padding-left: "500px";
+  padding-right: "500px";
+  /* display: flex; */
+  /* flex-direction: column; */
+  justify-content: space-between;
+  /* border: 1px solid lightgrey; */
+  /* height: 650px; */
+  /* width: 340px; */
+  /* border-radius: 25px; */
+  /* margin: 5px; */
+  /* box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5); */
+}
+.freedom-image{
+  height: 200px;
+  width: 320px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 1px rgba(211, 211, 211, 0.5);
+}
+.hotel-card-Equipment {
+  /* border: 1px solid lightgrey; */
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 5px;
+  margin: 8px;
+  box-shadow: 1px 1px 3px 1px rgba(211, 211, 211, 0.5);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

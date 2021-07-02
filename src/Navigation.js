@@ -56,7 +56,7 @@ export default function Navigation() {
       <Navbar fixed="top" bg="#9851c2" expand="xl" style={{ padding: 0, justifyContent: "space-around", backgroundColor: "#9851c2", height:'75px' }}>
         <Row className="Navbarrow">
           <Image style={{ height: "50px", }} src={logo} responsive />
-          <Navbar.Brand href="/">Brand Lorum</Navbar.Brand>
+          <Navbar.Brand href="/">MedicOcean</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
