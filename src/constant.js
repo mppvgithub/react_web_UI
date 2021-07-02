@@ -1,5 +1,5 @@
 import axios from "axios";
-export const BASE_URL = "http://192.168.43.102:4001"
+// export const BASE_URL = "http://192.168.43.102:4001"
 
 const BASE_URL_PRODUCT = "http://localhost:4000";
 const BASE_URL_USER = "http://192.168.43.102:4001";

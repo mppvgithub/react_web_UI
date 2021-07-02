@@ -35,11 +35,18 @@ export default function SignUp() {
   const [values, setValues] = useState({
     password: '',
     showPassword: false,
+    type:"Buyer"
   });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+  const handleChange = (event) => {
+    // const name = event.target.name;
+    setValues({
+      ...values,
+      type: event.target.value,
+    });
   };
+  // const handleChange = (prop) => (event) => {
+  //   setValues({ ...values, [prop]: event.target.value });
+  // };
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -68,7 +75,7 @@ export default function SignUp() {
     };
     return WebServiceRequest.callWebService(options);
   };
-  
+
   let callRestAPIPost = ({
     url,
     method = 'POST',
@@ -93,41 +100,26 @@ export default function SignUp() {
       "password": pwd,
       "ph_number": ph_no,
       "name": username,
-      "type": "buyer"
+      "type": values.type
     };
-    console.log("details", details)
+    console.log("send details", details)
 
-    callRestAPIGet({ url: WebServiceRequest.BASE_URL_USER + "/user/1"})
-    .then(res => console.log(res))
-    .catch(err => console.log("api err", err))
+    callRestAPIGet({ url: WebServiceRequest.BASE_URL_USER + "/user/1" })
+      .then(res => console.log(res))
+      .catch(err => console.log("api err", err))
 
-    var formBody = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
 
-    callRestAPIPost({ url :WebServiceRequest.BASE_URL_USER + "/user", data: details }
-        // {
-      // headers: {
-      //   // 'Authorization': 'Basic YWRtaW46MTIzNA==',
-      //   'Content-Type': 'application/json',
-      //   // 'X-API-KEY': 'RfTjWnZr4u7x!A-D' 
-      // },
-      // body: formBody
-    // }
-    ).then((response) => response.json())
+
+    callRestAPIPost({ url: WebServiceRequest.BASE_URL_USER + "/user", data: details })
+      // .then((response) => response.json())
       .then(async (res) => {
         console.log("clientdata res", res)
       }).catch((error) => {
         console.log("error", error)
       });
   }
-  // function handleChange() {
-  //   setValue(1)
-  // }
+
+ 
   const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
   return (
 
@@ -301,20 +293,20 @@ export default function SignUp() {
                 <div style={{ width: "100%", height: "100%", textAlign: "center", marginTop: "50px" }}>
                   <UI variant="filled" style={{ width: "500px" }}
                   >
-                    <InputLabel htmlFor="filled-age-native-simple">Age</InputLabel>
+                    <InputLabel htmlFor="filled-age-native-simple">User Type</InputLabel>
                     <Select
                       native
-                      value={12}
+                      value={values.type}
                       onChange={handleChange}
-                      inputProps={{
-                        name: 'age',
-                        id: 'filled-age-native-simple',
-                      }}
+                      // inputProps={{
+                      //   name: 'User Type',
+                      //   id: 'filled-age-native-simple',
+                      // }}
                     >
-                      <option aria-label="None" value="" />
-                      <option value={10}>Ten</option>
-                      <option value={20}>Twenty</option>
-                      <option value={30}>Thirty</option>
+                      {/* <option aria-label="None" value="" /> */}
+                      <option value={"Buyer"}>Buyer</option>
+                      <option value={"Seller"}>Seller</option>
+                      {/* <option value={30}>Others</option> */}
                     </Select>
                   </UI>
                 </div>
