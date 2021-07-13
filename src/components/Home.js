@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../index.css";
 import "../App.css";
+import { WebServiceRequest } from '../api/webService';
 
 let medical1 = '../images/medical1.jpg';
 let medical2 = '../images/medical2.jpg';
@@ -13,11 +14,13 @@ let den_off = '../images/den_off.jpg';
 let client1 = '../images/client1.jpeg';
 let client2 = '../images/client2.jpeg';
 
+import { Modal } from '@material-ui/core';
 
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import { Carousel } from 'react-responsive-carousel';
+import { InputLabel, Select, FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
 
 import { Button, Container, Row, Col, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,6 +28,17 @@ import * as Icon from 'react-bootstrap-icons';
 // import Footer from './footer';
 export default function Home() {
     const [isValid, setIsValid] = useState(false);
+    const [modal, setIsmodal] = useState(false);
+    const [email, setEmail] = useState('');
+
+    const [values, setValues] = useState({
+        product_name:"",
+        data1:"",
+        data2:"",
+        data3:"",
+        data4:""
+    });
+
     const numberOfPicture = [
         { name: 'item1' },
         { name: 'item2' },
@@ -60,10 +74,51 @@ export default function Home() {
     function alertprimary() {
         setIsValid(!isValid)
     }
+
+    const handleOpen = () => {
+        setIsmodal(true);
+    };
+
+    const handleClose = () => {
+        setIsmodal(false);
+    };
+
+    function on_submit() {
+        // var details = {
+        //     "email": email,
+        //     "password": pwd,
+        //     "ph_number": ph_no,
+        //     "name": username,
+        //     "type": "buyer"
+        // };
+        // console.log("details", details)
+
+        // WebServiceRequest.callRestAPIGet({ url: WebServiceRequest.BASE_URL_USER + "/user/1" })
+        //     .then(res => console.log(res))
+        //     .catch(err => console.log("api err", err))
+
+        // var formBody = [];
+        // for (var property in details) {
+        //     var encodedKey = encodeURIComponent(property);
+        //     var encodedValue = encodeURIComponent(details[property]);
+        //     formBody.push(encodedKey + "=" + encodedValue);
+        // }
+        // formBody = formBody.join("&");
+
+        // WebServiceRequest.callRestAPIPost({ url: WebServiceRequest.BASE_URL_USER + "/user", data: details }).then((response) => response.json())
+        //     .then(async (res) => {
+        //         console.log("clientdata res", res)
+        //     }).catch((error) => {
+        //         console.log("error", error)
+        //     });
+        handleClose()
+            
+    }
+
     const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
     return (
 
-        <Container className="container">
+        <Container className="constainer">
 
             {/* <Row style={{ marginTop: "75px", width: "100%", alignItems: "center", justifyContent: "center", height: "200px", backgroundColor: "#c1b3c9" }}> */}
             <React_Carousel >
@@ -102,9 +157,13 @@ export default function Home() {
                 </React_Carousel.Item>
             </React_Carousel>
             {/* </Row> */}
-            <div style={{ marginTop: "10px", padding: "10px" }} className="hotel-card-scroll">
+            <div style={{ marginTop: "10px", padding: "10px", textAlign: "right" }} className="hotel-card-scroll">
+                <button type="button" onClick={handleOpen} className="hotel-card-Add_btn">
+                    <text style={{ color: "#fff" }}> +ADD </text>
+                </button>
+
                 <ScrollMenu
-                    style={{ borderRadius: "10px", marginLeft: "10px", marginRight: "10px" }}
+                    style={{ borderRadius: "10px", marginLeft: "10px", marginRight: "10px", alignIem: "center" }}
                     // arrowLeft={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" < "}</div>}
                     // arrowRight={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" > "}</div>}
                     wheel={true}
@@ -122,13 +181,81 @@ export default function Home() {
                     ))}
                 />
             </div>
+            <Modal
+                open={modal}
+                onClose={handleClose}
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                style={{ textAlign: "center", marginTop: "80px", marginLeft: "60vh" }}
+            >
+                <Col style={{ height: "500px", width: "500px", backgroundColor: "#fff", borderRadius: "10px", flexDirection: "column" }}>
+                    <Row style={{ width: "500px", height: "70px", alignItem:"center", justifyContent: "center", marginTop: "30px", }}>
+                        <text style={{ fontSize: 20, marginTop: '25px', color:"#9851c2", fontWeight: 'bold' }}>ADD PRODUCT</text>
+                    </Row>
 
+
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "20px", alignItem:"center", justifyContent: "center" }}>
+                        <TextField
+                            style={{ width: "300px", height: "20px", }}
+
+                            label="Product Name"
+                            variant="outlined"
+                            value={values.product_name}
+                            onChange={(val) => setValues({ ...values, product_name: val.target.value })}
+                        />
+                    </Row>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                        <TextField
+                            style={{ width: "300px", height: "20px", }}
+
+                            label="Input Data"
+                            variant="outlined"
+                            value={values.data1}
+                            onChange={(val) => setValues({ ...values, data1: val.target.value })}
+                        />
+                    </Row>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                        <TextField
+                            style={{ width: "300px", height: "20px", }}
+
+                            label="Input Data"
+                            variant="outlined"
+                            value={values.data2}
+                            onChange={(val) => setValues({ ...values, data2: val.target.value })}
+                        />
+                    </Row>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                        <TextField
+                            style={{ width: "300px", height: "20px", }}
+
+                            label="Input Data"
+                            variant="outlined"
+                            value={values.data3}
+                        onChange={(val) => setValues({ ...values, data3: val.target.value })}
+                        />
+                    </Row>
+
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "10px", marginBottom: "20px", alignItem:"center", justifyContent: "center" }}>
+                        <Button
+                            style={{
+                                width: "300px", height: "50px", backgroundColor: "#9851c2"
+                            }}
+                        onClick={on_submit}
+                        // color="#9851c2"
+                        >
+                            <text style={{ fontSize: 22 }}>SUBMIT</text>
+                        </Button>
+                    </Row>
+
+
+                </Col>
+            </Modal>
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div style={{ width: "71%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', backgroundColor: "yellow", textAlign: "left" }}>
                         <text style={{ fontSize: 20, color: "red" }}>Consumable & Disposable</text>
                     </div>
-                    <div style={{ marginLeft: '1rem' }}>
+                    <div style={{ marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 15 }}>Top Selling Consumables and Disposables</text>
                     </div>
                     <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
@@ -153,7 +280,7 @@ export default function Home() {
                     </div>
                 </div>
                 <div style={{ width: "27%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 18, }}>Personal Protection Products</text>
                     </div>
                     <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
@@ -222,10 +349,10 @@ export default function Home() {
 
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 20, color: "red" }}>Medical Device & Equipment</text>
                     </div>
-                    <div style={{ marginLeft: '1rem' }}>
+                    <div style={{ marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 15 }}>Advanced Medical Devices and Equipment</text>
                     </div>
                     <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
@@ -302,10 +429,10 @@ export default function Home() {
 
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div style={{ width: "71%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 20, color: "red" }}>Dental</text>
                     </div>
-                    <div style={{ marginLeft: '1rem' }}>
+                    <div style={{ marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 15 }}>Largest Catalogue of Dental Products</text>
                     </div>
                     <div class="row" style={{ marginTop: '1rem', marginLeft: '1rem', }}>
@@ -333,8 +460,8 @@ export default function Home() {
                     </div>
                 </div>
                 <div style={{ width: "27%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', }}>
-                        <text style={{ fontSize: 18, }}>Dental Offer</text>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
+                        <text style={{ fontSize: 18, textAlign: "left" }}>Dental Offer</text>
                     </div>
                     <div class="row" style={{ marginTop: '1rem', marginLeft: '0.4rem', }}>
 
@@ -367,47 +494,47 @@ export default function Home() {
                 <text style={{ fontSize: 30 }}> What Our <text style={{ color: "#474aff" }}> Clients </text> Say About Us </text>
             </Row>
             <Row className="hotel-card-clinet-row" style={{ width: "100%", marginLeft: "5px", marginTop: "10px", flexDirection: "row" }}>
-                <Row className="hotel-card-clinet" style={{ width: "50%", padding:"20px" }}>
-                    <div style={{ width: "25%",  textAlign:"center",  }}>
+                <Row className="hotel-card-clinet" style={{ width: "50%", padding: "20px" }}>
+                    <div style={{ width: "25%", textAlign: "center", }}>
                         <img
 
                             src={client1}
-                            style={{marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
+                            style={{ marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
                             alt="Image"
                         />
                     </div>
                     <div style={{ width: "75%", }}>
-                        <div style={{ marginTop: "15px", marginLeft: "15px", }}>
+                        <div style={{ marginTop: "15px", marginLeft: "15px", textAlign: "left" }}>
                             <text style={{ color: "blue", fontSize: 18 }}>Dr. Anil sing</text>
                         </div>
-                        <div style={{ marginTop: "3px", marginLeft: "15px", }}>
+                        <div style={{ marginTop: "3px", marginLeft: "15px", textAlign: "left" }}>
                             <text style={{ fontSize: 15, marginTop: '5px' }}>Anil mark Imaging, New Delhi</text>
                         </div>
 
-                        <div style={{ marginTop: "20px",marginBottom:'30px', marginLeft: "15px",marginRight:'10px' }}>
+                        <div style={{ marginTop: "20px", marginBottom: '30px', marginLeft: "15px", marginRight: '10px', textAlign: "left" }}>
                             <text style={{ fontSize: 13, marginTop: '5px' }}>MedicOcean is fast emerging as a high end technology aggregator in addition to being a single point of contact for all medical supplies and consumables. We are excited to join hands with MedicOcean for Molecular Imaging products.</text>
 
                         </div>
                     </div>
                 </Row>
-                <Row className="hotel-card-clinet" style={{ width: "50%", padding:"20px" }}>
-                    <div style={{ width: "25%",  textAlign:"center",  }}>
+                <Row className="hotel-card-clinet" style={{ width: "50%", padding: "20px" }}>
+                    <div style={{ width: "25%", textAlign: "center", }}>
                         <img
 
                             src={client2}
-                            style={{marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
+                            style={{ marginTop: "15px", height: '110px', width: "110px", borderRadius: '110px' }}
                             alt="Image"
                         />
                     </div>
                     <div style={{ width: "75%", }}>
-                        <div style={{ marginTop: "15px", marginLeft: "15px", }}>
+                        <div style={{ marginTop: "15px", marginLeft: "15px", textAlign: "left" }}>
                             <text style={{ color: "blue", fontSize: 18 }}>Dr. Anil sing</text>
                         </div>
-                        <div style={{ marginTop: "3px", marginLeft: "15px", }}>
+                        <div style={{ marginTop: "3px", marginLeft: "15px", textAlign: "left" }}>
                             <text style={{ fontSize: 15, marginTop: '5px' }}>Anil mark Imaging, New Delhi</text>
                         </div>
 
-                        <div style={{ marginTop: "20px",marginBottom:'30px', marginLeft: "15px",marginRight:'10px' }}>
+                        <div style={{ marginTop: "20px", marginBottom: '30px', marginLeft: "15px", marginRight: '10px', textAlign: "left" }}>
                             <text style={{ fontSize: 13, marginTop: '5px' }}>MedicOcean is fast emerging as a high end technology aggregator in addition to being a single point of contact for all medical supplies and consumables. We are excited to join hands with MedicOcean for Molecular Imaging products.</text>
 
                         </div>
@@ -418,7 +545,7 @@ export default function Home() {
             </Row>
 
 
-            <Row style={{ width: "100%", alignItems: "center", justifyContent: "center", marginTop:"20px" }}>
+            <Row style={{ width: "100%", alignItems: "center", justifyContent: "center", marginTop: "20px", textAlign: "left" }}>
                 <div className="b_div1">
                     <h3 className="b_top" >Made with React</h3>
                     <h6 className="smallfont">A collection of websites and applications using the React or React Native JavaScript library.</h6>

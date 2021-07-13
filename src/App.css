@@ -146,7 +146,7 @@ header.content.top-sticky {
   border: 1px solid lightgrey;
   /* height: 650px; */
   /* width: 340px; */
-  border-radius: 25px;
+  border-radius: 20px;
   margin: 5px;
   box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
 }
@@ -158,7 +158,7 @@ header.content.top-sticky {
   border: 1px solid lightgrey;
   /* height: 650px; */
   width: "100%";
-  border-radius: 25px;
+  border-radius: 20px;
   margin: 5px;
   box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
 }
@@ -179,7 +179,7 @@ header.content.top-sticky {
   /* border: 1px solid lightgrey; */
   /* height: 650px; */
   /* width: 340px; */
-  /* border-radius: 25px; */
+  /* border-radius: 20px; */
   margin: 5px;
   /* box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5); */
 }
@@ -192,7 +192,7 @@ header.content.top-sticky {
   border: 1px solid lightgrey;
   /* height: 650px; */
   /* width: 340px; */
-  border-radius: 25px;
+  border-radius: 20px;
   margin: 5px;
   box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
 }
@@ -206,9 +206,25 @@ header.content.top-sticky {
   border: 1px solid lightgrey;
   /* height: 650px; */
   /* width: 340px; */
-  border-radius: 25px;
+  border-radius: 20px;
   /* margin: 5px; */
   box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
+  
+}
+.hotel-card-Add_btn {
+  padding-left: "500px";
+  padding-right: "500px";
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  border: 1px solid lightgrey;
+  /* height: 650px; */
+  /* width: 340px; */
+  border-radius: 20px;
+  /* margin: 5px; */
+  background-color:#9851c2;
+  box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5);
+  margin-bottom: 10px;
 }
 .hotel-card-Freedom {
   padding-left: "500px";
@@ -219,7 +235,7 @@ header.content.top-sticky {
   /* border: 1px solid lightgrey; */
   /* height: 650px; */
   /* width: 340px; */
-  /* border-radius: 25px; */
+  /* border-radius: 20px; */
   /* margin: 5px; */
   /* box-shadow: 2px 2px 8px 2px rgba(155, 155, 155, 0.5); */
 }
