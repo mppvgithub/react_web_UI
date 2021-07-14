@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +14,14 @@ import * as Icon from 'react-bootstrap-icons';
 
 export default function NavBar() {
   const [query, setQuery] = useState("");
+  const [Login_values, setLogin_Values] = useState({
+    email: localStorage.getItem('loginEmail') || '',
+  });
+  useEffect(()=>{
+    setLogin_Values({ ...Login_values, email: localStorage.getItem('loginEmail') || "" })
+  },[])
+  
+
   const handleInputChange = (event) => {
     setQuery(event.target.value);
   }
@@ -31,7 +39,7 @@ export default function NavBar() {
             <Nav.Link href="about">About</Nav.Link>
             <Nav.Link href="services">Services</Nav.Link>
             <Nav.Link href="contact">Contact us</Nav.Link>
-            <Nav.Link href="signUp">SignUp / SignIn</Nav.Link>
+            <Nav.Link href="signUp">SignUp {Login_values.email ==""?"/ SignIn":""}</Nav.Link>
           </Nav>
           <input type="text" style={{ borderRadius: 5, backgroundColor: "#d9aef2", height: "40px", marginRight: 5 }} id="filter" placeholder="Search for..." onChange={handleInputChange} value={query} />
           <Button style={{ borderRadius: 5, backgroundColor: "#c469fa", alignItems: "center", justifyContent: "center" }}
@@ -44,7 +52,7 @@ export default function NavBar() {
             <Nav.Link style={{ color: "#000", }} href="#home">Blog</Nav.Link>
             <Icon.Facebook style={{ marginRight: "20px" }} />
             <Icon.Twitter style={{ marginRight: "20px" }} />
-            <Button style={{ borderRadius: 30 }} variant="primary">+ Support Projects</Button>
+            <Button style={{ borderRadius: 30 }} variant="primary">{Login_values.email !="" ? Login_values.email:"User eMail"}</Button>
           </Row>
         </Navbar.Collapse>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 import "../App.css";
 import { WebServiceRequest } from '../api/webService';
@@ -15,7 +15,7 @@ let client1 = '../images/client1.jpeg';
 let client2 = '../images/client2.jpeg';
 
 import { Modal } from '@material-ui/core';
-
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
@@ -27,34 +27,48 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
 // import Footer from './footer';
 export default function Home() {
+
+    const dispatch = useDispatch();
+
+    // const dataReducer = useSelector((state) => state.dataReducers);
+    // console.log("IN STORE dataReducer -->", dataReducer);
+
+    // const { menus } = dataReducer;
+    // console.log("menus", menus);
+
     const [isValid, setIsValid] = useState(false);
     const [modal, setIsmodal] = useState(false);
     const [email, setEmail] = useState('');
 
     const [values, setValues] = useState({
-        product_name:"",
-        data1:"",
-        data2:"",
-        data3:"",
-        data4:""
+        product_name: "",
+        data1: "",
+        data2: "",
+        data3: "",
+        data4: ""
+    });
+
+    const [Login_values, setLogin_Values] = useState({
+        email: localStorage.getItem('loginEmail') || '',
     });
 
     const numberOfPicture = [
-        { name: 'item1' },
-        { name: 'item2' },
-        { name: 'item3' },
-        { name: 'item4' },
-        { name: 'item5' },
-        { name: 'item6' },
-        { name: 'item7' },
-        { name: 'item8' },
-        { name: 'item9' },
-        { name: 'item10' },
-        { name: 'item11' },
-        { name: 'item12' },
-        { name: 'item13' },
-        { name: 'item14' }
+        { name: 'item1', itemId: "1", itemPrice: "10" },
+        { name: 'item2', itemId: "2", itemPrice: "10" },
+        { name: 'item3', itemId: "3", itemPrice: "10" },
+        { name: 'item4', itemId: "4", itemPrice: "10" },
+        { name: 'item5', itemId: "5", itemPrice: "10" },
+        { name: 'item6', itemId: "6", itemPrice: "10" },
+        { name: 'item7', itemId: "7", itemPrice: "10" },
+        { name: 'item8', itemId: "8", itemPrice: "10" },
+        { name: 'item9', itemId: "9", itemPrice: "10" },
+        { name: 'item10', itemId: "10", itemPrice: "100" },
+        { name: 'item11', itemId: "11", itemPrice: "105" },
+        { name: 'item12', itemId: "12", itemPrice: "105" },
+        { name: 'item13', itemId: "13", itemPrice: "107" },
+        { name: 'item14', itemId: "14", itemPrice: "170" }
     ];
+
     const image_text = [
         {
             title: 'Bugatti Chiron Super Sport 300',
@@ -70,6 +84,11 @@ export default function Home() {
         },
 
     ];
+
+    useEffect(() => {
+
+        console.log("Logged email password", Login_values.email,)
+    }, [])
 
     function alertprimary() {
         setIsValid(!isValid)
@@ -112,7 +131,7 @@ export default function Home() {
         //         console.log("error", error)
         //     });
         handleClose()
-            
+
     }
 
     const handleSelect = (eventKey) => alert(`selected ${eventKey}`);
@@ -189,12 +208,12 @@ export default function Home() {
                 style={{ textAlign: "center", marginTop: "80px", marginLeft: "60vh" }}
             >
                 <Col style={{ height: "500px", width: "500px", backgroundColor: "#fff", borderRadius: "10px", flexDirection: "column" }}>
-                    <Row style={{ width: "500px", height: "70px", alignItem:"center", justifyContent: "center", marginTop: "30px", }}>
-                        <text style={{ fontSize: 20, marginTop: '25px', color:"#9851c2", fontWeight: 'bold' }}>ADD PRODUCT</text>
+                    <Row style={{ width: "500px", height: "70px", alignItem: "center", justifyContent: "center", marginTop: "30px", }}>
+                        <text style={{ fontSize: 20, marginTop: '25px', color: "#9851c2", fontWeight: 'bold' }}>ADD PRODUCT</text>
                     </Row>
 
 
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "20px", alignItem:"center", justifyContent: "center" }}>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "20px", alignItem: "center", justifyContent: "center" }}>
                         <TextField
                             style={{ width: "300px", height: "20px", }}
 
@@ -204,7 +223,7 @@ export default function Home() {
                             onChange={(val) => setValues({ ...values, product_name: val.target.value })}
                         />
                     </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
                         <TextField
                             style={{ width: "300px", height: "20px", }}
 
@@ -214,7 +233,7 @@ export default function Home() {
                             onChange={(val) => setValues({ ...values, data1: val.target.value })}
                         />
                     </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
                         <TextField
                             style={{ width: "300px", height: "20px", }}
 
@@ -224,23 +243,23 @@ export default function Home() {
                             onChange={(val) => setValues({ ...values, data2: val.target.value })}
                         />
                     </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center",alignItem:"center", justifyContent: "center" }}>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
                         <TextField
                             style={{ width: "300px", height: "20px", }}
 
                             label="Input Data"
                             variant="outlined"
                             value={values.data3}
-                        onChange={(val) => setValues({ ...values, data3: val.target.value })}
+                            onChange={(val) => setValues({ ...values, data3: val.target.value })}
                         />
                     </Row>
 
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "10px", marginBottom: "20px", alignItem:"center", justifyContent: "center" }}>
+                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "10px", marginBottom: "20px", alignItem: "center", justifyContent: "center" }}>
                         <Button
                             style={{
                                 width: "300px", height: "50px", backgroundColor: "#9851c2"
                             }}
-                        onClick={on_submit}
+                            onClick={on_submit}
                         // color="#9851c2"
                         >
                             <text style={{ fontSize: 22 }}>SUBMIT</text>
@@ -252,7 +271,7 @@ export default function Home() {
             </Modal>
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div style={{ width: "71%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', backgroundColor: "yellow", textAlign: "left" }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 20, color: "red" }}>Consumable & Disposable</text>
                     </div>
                     <div style={{ marginLeft: '1rem', textAlign: "left" }}>

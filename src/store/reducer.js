@@ -1,133 +1,65 @@
-// import React from 'react';
-// import { createStore } from 'redux';
-import { LOGIN, LOGOUT, ADD_TO_CART, GET_CART_CONTENTS, REMOVE_CART, CLEAR_CART, INCREMENT_ITEM, DECREMENT_ITEM } from './selectors';
-// import { loginAction, logoutAction } from './actions';
+import { combineReducers } from 'redux';
 
-const initialCartContents = {
-	itemsInfo: [],
-	itemsCount: 0,
-	itemsTotal: 0.00
+import {
+	MENU_AVAILABLE,
+	ADD_MENU,
+	DEL_MENU,
+	UPDATE_MENU
+} from "./actions" //Import the actions types constant we defined in our actions
+
+let dataState = {
+	menus: []
 };
 
-const initialState = {
-	isLogged: (localStorage.getItem('_id')) ? true : false,
-	cartContents: (localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : initialCartContents,
-};
+const dataReducers = (state = dataState, action) => {
+	switch (action.type) {
 
-export default function reducer(state = initialState, action) {
-	switch(action.type) {
-		case LOGIN: {
-			return { ...state, isLogged: true };
+		case ADD_MENU: {
+			console.log("action.data", action.data)
+			var get_menu = action.data.details;
+			console.log("get_menu", get_menu)
+			state.menus.push(get_menu);
+			return { ...state };
 		}
-		case LOGOUT: {
-			return { ...state, isLogged: false, cartContents: initialCartContents };
+
+		case MENU_AVAILABLE: {
+			console.log("MENU_AVAILABLE action from async", action)
+			let get_menus = action.data.details;
+			state.menus = (get_menus);
+			console.log("state.menus", state.menus)
+			return { ...state };
 		}
-		case GET_CART_CONTENTS: {
-			return { ...state }
+
+		case UPDATE_MENU: {
+			var get_menu = action.data.details;
+			console.log("get_menu", get_menu)
+			state.menus.map((val, key) => {
+				if (val.itemId == get_menu.itemId) {
+					state.menus[key].itemSelcted = get_menu.itemSelcted
+				}
+			})
+			// state.menus.push(get_menu);
+			return { ...state };
 		}
-		case ADD_TO_CART: {
-			if(state.cartContents.itemsCount === 0) {
-				let newItem = {
-					itemId: action.payload.itemId,
-					itemName: action.payload.itemName,
-					itemImage: action.payload.itemImage,
-					itemAmount: action.payload.itemAmount,
-					itemQuantity: 1,
-				};
-				state.cartContents.itemsInfo.push(newItem);
-				state.cartContents.itemsTotal = state.cartContents.itemsTotal + action.payload.itemAmount;
-			} else {
-				let check = false;
-				state.cartContents.itemsInfo.map((item, key) => {
-					if(item.itemId === action.payload.itemId) {
-						state.cartContents.itemsInfo[key].itemQuantity++;
-						check = true;
-					}
-				});
-				if(!check) {
-					let newItem = {
-						itemId: action.payload.itemId,
-						itemName: action.payload.itemName,
-						itemImage: action.payload.itemImage,
-						itemAmount: action.payload.itemAmount,
-						itemQuantity: 1,
-					};
-					state.cartContents.itemsInfo.push(newItem);
+
+		case DEL_MENU: {
+			var id = action.data.details;
+			console.log("id", id)
+			state.menus.map((val, key) => {
+				if (val.itemId == id) {
+					state.menus.splice(key, 1)
 				}
-				state.cartContents.itemsTotal = state.cartContents.itemsTotal + action.payload.itemAmount;
-			}
-			state.cartContents.itemsCount = state.cartContents.itemsCount + 1;
-			localStorage.setItem('cart', JSON.stringify(state.cartContents));
-			return { ...state }
+			})
+
+			return { ...state };
 		}
-		case REMOVE_CART: {
-			let remainingItems = [];
-			state.cartContents.itemsInfo.map((item, key) => {
-				if(item.itemId !== action.payload.itemId) {
-					remainingItems.push(item);
-				}
-			});
-			state.cartContents.itemsCount = state.cartContents.itemsCount - action.payload.itemQuantity;
-			state.cartContents.itemsTotal = state.cartContents.itemsTotal - ( action.payload.itemQuantity * action.payload.itemAmount);
-			state.cartContents.itemsInfo = remainingItems;
-			localStorage.setItem('cart', JSON.stringify(state.cartContents));
-			return { 
-				...state,
-				cartContents: {
-					itemsInfo: remainingItems,
-					itemsCount: state.cartContents.itemsCount,
-					itemsTotal: state.cartContents.itemsTotal
-				}
-			}
-		}
-		case CLEAR_CART: {
-			localStorage.removeItem('cart');
-			return {
-				...state,
-				cartContents: {
-					itemsInfo: [],
-					itemsCount: 0,
-					itemsTotal: 0.00,
-				}
-			}
-		}
-		case INCREMENT_ITEM: {
-			state.cartContents.itemsInfo.map((item, key) => {
-				if(item.itemId === action.payload.itemId) {
-					state.cartContents.itemsInfo[ key ].itemQuantity++;
-				}
-			});
-			state.cartContents.itemsCount = state.cartContents.itemsCount + 1;
-			state.cartContents.itemsTotal = state.cartContents.itemsTotal + action.payload.itemAmount;
-			localStorage.setItem('cart', JSON.stringify(state.cartContents));
-			return {
-				...state,
-				cartContents: {
-					itemsInfo: state.cartContents.itemsInfo,
-					itemsCount: state.cartContents.itemsCount,
-					itemsTotal: state.cartContents.itemsTotal
-				}
-			}
-		}
-		case DECREMENT_ITEM: {
-			state.cartContents.itemsInfo.map((item, key) => {
-				if(item.itemId === action.payload.itemId) {
-					state.cartContents.itemsInfo[ key ].itemQuantity--;
-				}
-			});
-			state.cartContents.itemsCount = state.cartContents.itemsCount - 1;
-			state.cartContents.itemsTotal = state.cartContents.itemsTotal - action.payload.itemAmount;
-			localStorage.setItem('cart', JSON.stringify(state.cartContents));
-			return {
-				...state,
-				cartContents: {
-					itemsInfo: state.cartContents.itemsInfo,
-					itemsCount: state.cartContents.itemsCount,
-					itemsTotal: state.cartContents.itemsTotal
-				}
-			}
-		}
+
 		default:
 			return state;
 	}
-}
+};
+
+// Combine all the reducers
+const rootReducer = combineReducers({ dataReducers });
+
+export default rootReducer;
