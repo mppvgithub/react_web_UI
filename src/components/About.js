@@ -27,6 +27,7 @@ export default function About() {
   const { menus } = dataReducer;
   console.log("menus", menus)
 
+  const [items_selected, setItems_selected] = useState([])
   const [Login_values, setLogin_Values] = useState({
     password: localStorage.getItem('loginPassword') || '',
     email: localStorage.getItem('loginEmail') || '',
@@ -50,8 +51,24 @@ export default function About() {
   ];
   useEffect(() => {
     get_store_data()
+    selected_id()
     // console.log("Logged email password", Login_values.email, Login_values.password)
   }, [])
+
+  useEffect(() => {
+    selected_id()
+  }, [dataReducer])
+
+  const selected_id = async () => {
+    console.log("menu update")
+    var tot = []
+    await menus.map((val, key) => {
+      tot.push(val.itemId)
+
+    })
+    setItems_selected(tot)
+    console.log("items_selected", items_selected)
+  }
 
   const get_store_data = () => {
 
@@ -158,14 +175,22 @@ export default function About() {
                       />
                     </div>
                     <div>
-                      <Button
-                        onClick={() => { addcart(item) }}
-                        style={{
-                          backgroundColor: "#9851c2", alignItems: "center", justifyContent: "center"
-                        }}
-                      >
-                        <text style={{ fontSize: 12 }}>Add cart</text>
-                      </Button>
+                      {
+                        items_selected.includes(item.itemId) ?
+                          <Button style={{ alignItems: "center", justifyContent: "center" }}>
+                            <text style={{ fontSize: 12 }}>Added</text>
+                          </Button>
+                          :
+                          <Button
+                            onClick={() => { addcart(item) }}
+                            style={{
+                              backgroundColor: "#9851c2", alignItems: "center", justifyContent: "center"
+                            }}
+                          >
+                            <text style={{ fontSize: 12 }}>Add cart</text>
+                          </Button>
+                      }
+
                     </div>
                   </Card>
                 )
