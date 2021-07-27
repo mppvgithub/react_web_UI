@@ -36,7 +36,7 @@ export default function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="about">About</Nav.Link>
+            <Nav.Link style={{color:"#fff"}} href="about">Products</Nav.Link>
             <Nav.Link href="services">Services</Nav.Link>
             <Nav.Link href="contact">Contact us</Nav.Link>
             <Nav.Link href="signUp">SignUp {Login_values.email ==""?"/ SignIn":""}</Nav.Link>

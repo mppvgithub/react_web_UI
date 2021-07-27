@@ -6,6 +6,8 @@ import Users from './components/Users';
 import Products from './components/Products';
 import Contact from './components/Contact';
 import SignUp from './components/SignUp';
+import Cart from './components/Cart';
+
 
 
 import {
@@ -41,6 +43,7 @@ function App() {
           {/* <Route exact path="/services" render={checkHome(Services)} /> */}
           <Route exact path="/contact" render={checkHome(Contact)} />
           <Route exact path="/signUp" render={checkHome(SignUp)} />
+          <Route exact path="/Cart" render={checkHome(Cart)} />
           {/* <Route exact path="/products" render={checkHome(Products)} /> */}
           <Route path="*" render={() => <p style={{ "textAlign": "center", "marginTop": "25px" }}>Page Not Found</p>} />
         </Switch>

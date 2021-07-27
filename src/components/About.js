@@ -49,11 +49,23 @@ export default function About() {
     { name: 'item14', itemId: "14", itemPrice: "170" }
   ];
   useEffect(() => {
-
-    console.log("Logged email password", Login_values.email, Login_values.password)
+    get_store_data()
+    // console.log("Logged email password", Login_values.email, Login_values.password)
   }, [])
 
+  const get_store_data = () => {
 
+    var data = localStorage.getItem('menus');
+    if (data !== null) {
+      //Initially save data to store , before rendering data
+      dispatch(get_addMenu(JSON.parse(data)));
+    }
+  }
+
+  const clear_storage = async () => {
+    await localStorage.removeItem("menus")
+    await alert("LS Cleared")
+  }
   const addcart = async (item) => {
     //details to save in store
     var details = {
@@ -62,53 +74,60 @@ export default function About() {
       "itemName": item.name,
       "itemSelcted": 1
     }
-    console.log("details", details)
+    console.log("Add data", details)
     var menu_arr = []
 
     var menus = await localStorage.getItem('menus', (menus))
     console.log("local storage menus", menus)
     if (menus != null) {
       var temp_menu = []
-      temp_menu.push(JSON.parse(menus)) 
-      console.log("available menus", temp_menu)
-      console.log("details------", details)
-      temp_menu.unshift(details)
+      temp_menu = (JSON.parse(menus))
+      console.log("available menus in LS", temp_menu)
+      console.log("details to push in LS------", details)
+      temp_menu.push(details)
+      console.log("unshfted menus", menus)
+      localStorage.setItem('menus', JSON.stringify(temp_menu))
+      dispatch(add_menu(details));
 
-     await localStorage.setItem('menus', JSON.stringify(temp_menu))
-     await  dispatch(add_menu(details));
-    } else {
+      var menus = await localStorage.getItem('menus', (menus))
+      console.log("result menus", menus)
+    }
+    else {
       menu_arr.push(details)
       console.log("menu_arr", menu_arr)
       await localStorage.setItem('menus', JSON.stringify(menu_arr))
       await dispatch(add_menu(details));
 
+
+      var menus = await localStorage.getItem('menus', (menus))
+      console.log("result menus", menus)
     }
 
 
     // dispatch(add_menu(details));
 
-    localStorage.getItem('menus', (err, menus) => {
-      console.log("localStorage")
-      console.log("async menu", menus)
-      if (err) alert(err.message)
+    // localStorage.getItem('menus', (err, menus) => {
+    //   console.log("localStorage")
+    //   console.log("async menu", menus)
+    //   if (err) alert(err.message)
 
-      else if (menus !== "null" && menus !== null) {
-        menus = JSON.parse(menus)
-        console.log("available menus", menus)
-        console.log("details------", details)
-        menus.unshift(details)
+    //   else if (menus !== "null" && menus !== null) {
+    //     menus = JSON.parse(menus)
+    //     console.log("available menus", menus)
+    //     console.log("details------", details)
+    //     menus.unshift(details)
 
-        localStorage.setItem('menus', JSON.stringify(menus), () => {
-          dispatch(add_menu(details));
-        });
-      } else {
-        menu_arr.push(details)
-        console.log("menu_arr", menu_arr)
-        localStorage.setItem('menus', JSON.stringify(menu_arr), () => {
-          dispatch(add_menu(details));
-        });
-      }
-    })
+    //     localStorage.setItem('menus', JSON.stringify(menus), () => {
+    //       dispatch(add_menu(details));
+    //     });
+    //   } else {
+    //     menu_arr.push(details)
+    //     console.log("menu_arr", menu_arr)
+    //     localStorage.setItem('menus', JSON.stringify(menu_arr), () => {
+    //       dispatch(add_menu(details));
+    //     });
+    //   }
+    // })
 
     // to push details in store
 
@@ -119,7 +138,7 @@ export default function About() {
     <Container className="container">
       <Row style={{ width: "100%", marginLeft: "5px", marginTop: "100px", }}>
         <div style={{ width: "100%", }} className="hotel-card">
-          <div style={{ marginTop: '1rem', marginLeft: '1rem', backgroundColor: "yellow", textAlign: "left" }}>
+          <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
             <text style={{ fontSize: 20, color: "red" }}>Consumable & Disposable</text>
           </div>
           <div style={{ marginLeft: '1rem', textAlign: "left" }}>
@@ -157,6 +176,28 @@ export default function About() {
         </div>
 
       </Row>
+      <Row style={{ flexDirection: "row-reverse", padding: 20 }}>
+        {/* <Button
+          // onClick={() => { clear_storage() }}
+          style={{
+            backgroundColor: "#9851c2", alignItems: "center", justifyContent: "center",
+          }}
+        >
+          <text style={{ fontSize: 15 }}>  Cart({menus.length}) </text>
+        </Button> */}
+        <Link to="/Cart" className="btn btn-primary"> Cart({menus.length}) </Link>
+
+        <Button
+          onClick={() => { clear_storage() }}
+          style={{
+            backgroundColor: "#9851c2", alignItems: "center", justifyContent: "center", marginRight: 10
+          }}
+        >
+          <text style={{ fontSize: 15 }}>  Clear LS  </text>
+        </Button>
+
+      </Row>
+
     </Container>
   );
 }

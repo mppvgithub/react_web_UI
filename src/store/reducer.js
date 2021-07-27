@@ -15,9 +15,9 @@ const dataReducers = (state = dataState, action) => {
 	switch (action.type) {
 
 		case ADD_MENU: {
-			console.log("action.data", action.data)
+			// console.log("action.data", action.data)
 			var get_menu = action.data.details;
-			console.log("get_menu", get_menu)
+			// console.log("get_menu", get_menu)
 			state.menus.push(get_menu);
 			return { ...state };
 		}
