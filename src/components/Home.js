@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 import "../App.css";
 import { WebServiceRequest } from '../api/webService';
@@ -15,19 +15,27 @@ let client1 = '../images/client1.jpeg';
 let client2 = '../images/client2.jpeg';
 
 import { Modal } from '@material-ui/core';
-
+import { useDispatch, useSelector } from 'react-redux';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import { Carousel } from 'react-responsive-carousel';
 import { InputLabel, Select, FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { Button, Container, Row, Col, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
 // import Footer from './footer';
 export default function Home() {
+
+    const dispatch = useDispatch();
+
+    // const dataReducer = useSelector((state) => state.dataReducers);
+    // console.log("IN STORE dataReducer -->", dataReducer);
+
+    // const { menus } = dataReducer;
+    // console.log("menus", menus);
+
     const [isValid, setIsValid] = useState(false);
     const [modal, setIsmodal] = useState(false);
     const [email, setEmail] = useState('');
@@ -40,22 +48,27 @@ export default function Home() {
         data4: ""
     });
 
+    const [Login_values, setLogin_Values] = useState({
+        email: localStorage.getItem('loginEmail') || '',
+    });
+
     const numberOfPicture = [
-        { name: 'item1' },
-        { name: 'item2' },
-        { name: 'item3' },
-        { name: 'item4' },
-        { name: 'item5' },
-        { name: 'item6' },
-        { name: 'item7' },
-        { name: 'item8' },
-        { name: 'item9' },
-        { name: 'item10' },
-        { name: 'item11' },
-        { name: 'item12' },
-        { name: 'item13' },
-        { name: 'item14' }
+        { name: 'item1', itemId: "1", itemPrice: "10" },
+        { name: 'item2', itemId: "2", itemPrice: "10" },
+        { name: 'item3', itemId: "3", itemPrice: "10" },
+        { name: 'item4', itemId: "4", itemPrice: "10" },
+        { name: 'item5', itemId: "5", itemPrice: "10" },
+        { name: 'item6', itemId: "6", itemPrice: "10" },
+        { name: 'item7', itemId: "7", itemPrice: "10" },
+        { name: 'item8', itemId: "8", itemPrice: "10" },
+        { name: 'item9', itemId: "9", itemPrice: "10" },
+        { name: 'item10', itemId: "10", itemPrice: "100" },
+        { name: 'item11', itemId: "11", itemPrice: "105" },
+        { name: 'item12', itemId: "12", itemPrice: "105" },
+        { name: 'item13', itemId: "13", itemPrice: "107" },
+        { name: 'item14', itemId: "14", itemPrice: "170" }
     ];
+
     const image_text = [
         {
             title: 'Bugatti Chiron Super Sport 300',
@@ -71,6 +84,11 @@ export default function Home() {
         },
 
     ];
+
+    useEffect(() => {
+
+        console.log("Logged email password", Login_values.email,)
+    }, [])
 
     function alertprimary() {
         setIsValid(!isValid)
@@ -157,62 +175,10 @@ export default function Home() {
                     </React_Carousel.Caption>
                 </React_Carousel.Item>
             </React_Carousel>
-
-
-
-            <div
-                className="scrollmenu"
-                className="hotel-card-scroll"
-            >
-                <InfiniteScroll
-                    className="row"
-                    style={{ width: "1080px", overflowX: 'auto',textAlign:"center" }}
-                    dataLength={5}
-                    scrollableTarget="idscroll"
-                    // next={this.fetchMoreItems}
-                    // hasMore={this.state.hasMore}
-
-                    endMessage={
-                        <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
-                            <div style={{ alignItems: "center", justifyContent: "center", }}>
-                                <img
-                                    src={dental}
-                                    style={{ height: "50px", width: "50px" }}
-                                    alt="Image"
-                                />
-                                <h6>Add more</h6>
-                            </div>
-                        </Card>
-                    }
-                    loader={<div className="text-center col-md-12"><p className="alert alert-info" style={{ maxWidth: "25%", margin: "auto" }}>Loading...</p></div>}
-                    engMessage={<div className="text-center col-md-12"><p className="alert alert-danger" style={{ maxWidth: "25%", margin: "auto" }}>There are no more items.</p></div>}
-                    scrollThreshold={1.0}
-                >
-                    {
-                        numberOfPicture.map((item, ind) => {
-                            return <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
-                                <div style={{ alignItems: "center", justifyContent: "center", }}>
-                                    <img
-                                        src={dental}
-                                        style={{ height: "50px", width: "50px" }}
-                                        alt="Image"
-                                    />
-                                    <h6>{item.name} Lorum Ipsum</h6>
-                                </div>
-                            </Card>
-                        })
-
-                    }
-                </InfiniteScroll>
-            </div>
-
-
-
-
             {/* </Row> */}
             <div style={{ marginTop: "10px", padding: "10px", textAlign: "right" }} className="hotel-card-scroll">
                 <button type="button" onClick={handleOpen} className="hotel-card-Add_btn">
-                    <text style={{ color: "#fff" }}>  +ADD  </text>
+                    <text style={{ color: "#fff" }}> +ADD </text>
                 </button>
 
                 <ScrollMenu
@@ -305,7 +271,7 @@ export default function Home() {
             </Modal>
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div style={{ width: "71%", }} className="hotel-card">
-                    <div style={{ marginTop: '1rem', marginLeft: '1rem', backgroundColor: "yellow", textAlign: "left" }}>
+                    <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
                         <text style={{ fontSize: 20, color: "red" }}>Consumable & Disposable</text>
                     </div>
                     <div style={{ marginLeft: '1rem', textAlign: "left" }}>

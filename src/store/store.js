@@ -1,5 +1,14 @@
-// import React from 'react';
-import { createStore } from 'redux';
-import reducer from './reducer';
+// // import React from 'react';
+// import { createStore } from 'redux';
+// import reducer from './reducer';
 
-export default createStore(reducer);
+// export default createStore(reducer);
+
+
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+
+import reducers from './reducer'; //Import the reducer
+
+// Connect our store to the reducers
+export default createStore(reducers, applyMiddleware(thunk));

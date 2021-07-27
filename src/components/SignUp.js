@@ -1,10 +1,11 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../index.css";
 import "../App.css";
 import { WebServiceRequest } from '../api/webService';
 let logo = '../images/logo.png';
-
+import Home from './Home';
+import { Redirect, Link } from 'react-router-dom';
 import { InputLabel, Select, FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import { Button, Container, Row, Col, Tabs, Tab, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
@@ -23,6 +24,15 @@ export default function SignUp() {
         type: "Buyer"
     });
 
+    const [Login_values, setLogin_Values] = useState({
+        password: localStorage.getItem('loginPassword') || '',
+        email: localStorage.getItem('loginEmail') || '',
+    });
+    useEffect(() => {
+        
+        console.log("Logged email password", Login_values.email, Login_values.password)
+    }, [])
+
     const handleChange = (event) => {
         // const name = event.target.name;
         setValues({
@@ -38,7 +48,18 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-    
+    function on_login ()  {
+        // console.log("login clicked")
+        // localStorage.setItem("loginEmail", Login_values.email)
+        // localStorage.setItem("loginPassword", Login_values.password)
+        return (
+            <Redirect to={{
+                'pathname' : "/About",
+                'state' : ''
+            }} />
+        )
+
+    }
     function on_register() {
         var details = {
             "email": email,
@@ -97,8 +118,8 @@ export default function SignUp() {
 
                                         label="Email Address"
                                         variant="outlined"
-                                        value={email}
-                                        onChange={(val) => setEmail(val.target.value)}
+                                        value={Login_values.email}
+                                        onChange={(val) => setLogin_Values({ ...Login_values, email: val.target.value })}
                                     />
                                 </div>
 
@@ -108,28 +129,29 @@ export default function SignUp() {
 
                                         label="Password"
                                         variant="outlined"
-                                        value={pwd}
+                                        value={Login_values.password}
                                         type={"password"}
-                                        onChange={(val) => setPwd(val.target.value)}
+                                        onChange={(val) => setLogin_Values({ ...Login_values, password: val.target.value })}
 
-                                        endAdornment={
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    aria-label="toggle password visibility"
-                                                    onClick={handleClickShowPassword}
-                                                    onMouseDown={handleMouseDownPassword}
-                                                    edge="end"
-                                                >
-                                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        }
+                                    // endAdornment={
+                                    //     <InputAdornment position="end">
+                                    //         <IconButton
+                                    //             aria-label="toggle password visibility"
+                                    //             onClick={handleClickShowPassword}
+                                    //             onMouseDown={handleMouseDownPassword}
+                                    //             edge="end"
+                                    //         >
+                                    //             {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    //         </IconButton>
+                                    //     </InputAdornment>
+                                    // }
                                     />
                                 </div>
 
                                 <div style={{ width: "100%", height: "100%", textAlign: "center", marginTop: "50px", marginBottom: "100px" }}>
 
                                     <Button
+                                        onClick={on_login}
                                         style={{
                                             width: "500px", height: "50px", backgroundColor: "#9851c2"
                                         }}
