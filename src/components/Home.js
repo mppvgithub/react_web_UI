@@ -14,7 +14,7 @@ let den_off = '../images/den_off.jpg';
 let client1 = '../images/client1.jpeg';
 let client2 = '../images/client2.jpeg';
 
-import { Modal } from '@material-ui/core';
+// import { Modal } from '@material-ui/core';
 
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -23,7 +23,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { InputLabel, Select, FormControl as UI, TextField, InputAdornment, IconButton, OutlinedInput } from '@material-ui/core';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-import { Button, Container, Row, Col, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
+import { Button, Container, Row, Col, Modal, Figure, Alert, Carousel as React_Carousel, Pagination, Accordion, Card, Badge, ListGroup, Navbar, Nav, NavDropdown, ResponsiveEmbed, Image, Form, FormControl, InputGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import * as Icon from 'react-bootstrap-icons';
 // import Footer from './footer';
@@ -158,151 +158,116 @@ export default function Home() {
                 </React_Carousel.Item>
             </React_Carousel>
 
-
-
-            <div
-                className="scrollmenu"
-                className="hotel-card-scroll"
-            >
-                <InfiniteScroll
-                    className="row"
-                    style={{ width: "1080px", overflowX: 'auto',textAlign:"center" }}
-                    dataLength={5}
-                    scrollableTarget="idscroll"
-                    // next={this.fetchMoreItems}
-                    // hasMore={this.state.hasMore}
-
-                    endMessage={
-                        <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
-                            <div style={{ alignItems: "center", justifyContent: "center", }}>
-                                <img
-                                    src={dental}
-                                    style={{ height: "50px", width: "50px" }}
-                                    alt="Image"
-                                />
-                                <h6>Add more</h6>
-                            </div>
-                        </Card>
-                    }
-                    loader={<div className="text-center col-md-12"><p className="alert alert-info" style={{ maxWidth: "25%", margin: "auto" }}>Loading...</p></div>}
-                    engMessage={<div className="text-center col-md-12"><p className="alert alert-danger" style={{ maxWidth: "25%", margin: "auto" }}>There are no more items.</p></div>}
-                    scrollThreshold={1.0}
-                >
-                    {
-                        numberOfPicture.map((item, ind) => {
-                            return <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
-                                <div style={{ alignItems: "center", justifyContent: "center", }}>
-                                    <img
-                                        src={dental}
-                                        style={{ height: "50px", width: "50px" }}
-                                        alt="Image"
-                                    />
-                                    <h6>{item.name} Lorum Ipsum</h6>
-                                </div>
-                            </Card>
-                        })
-
-                    }
-                </InfiniteScroll>
-            </div>
-
-
-
-
-            {/* </Row> */}
             <div style={{ marginTop: "10px", padding: "10px", textAlign: "right" }} className="hotel-card-scroll">
                 <button type="button" onClick={handleOpen} className="hotel-card-Add_btn">
                     <text style={{ color: "#fff" }}>  +ADD  </text>
                 </button>
 
-                <ScrollMenu
-                    style={{ borderRadius: "10px", marginLeft: "10px", marginRight: "10px", alignIem: "center" }}
-                    // arrowLeft={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" < "}</div>}
-                    // arrowRight={<div style={{ fontSize: "30px", backgroundColor:"red" }}>{" > "}</div>}
-                    wheel={true}
-                    data={numberOfPicture.map((picture, index) => (
-                        <Card style={{ borderRadius: "10px", width: '8rem', height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
-                            <div style={{ alignItems: "center", justifyContent: "center", }}>
-                                <img
-                                    src={dental}
-                                    style={{ height: "50px", width: "50px" }}
-                                    alt="Image"
-                                />
-                                <h6>{index} Lorum Ipsum</h6>
-                            </div>
-                        </Card>
-                    ))}
-                />
+                <div className="scrollmenu">
+                    <ListGroup horizontal>
+                        {
+                            numberOfPicture.map((item, ind) => {
+                                return <ListGroup.Item style={{ backgroundColor: "#fbf5ff", borderRadius: "10px", width: "180px", height: '8rem', alignItems: "center", justifyContent: "center", marginRight: 5 }}>
+                                    <div style={{ alignItems: "center", justifyContent: "center", width: '6rem', height: '8rem', }}>
+                                        <img
+                                            src={dental}
+                                            style={{ height: "50px", width: "50px" }}
+                                            alt="Image"
+                                        />
+                                        <h6>{item.name}</h6>
+                                    </div>
+                                </ListGroup.Item>
+                            })
+
+                        }
+                    </ListGroup>
+                </div>
             </div>
-            <Modal
-                open={modal}
-                onClose={handleClose}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                style={{ textAlign: "center", marginTop: "80px", marginLeft: "60vh" }}
-            >
-                <Col style={{ height: "500px", width: "500px", backgroundColor: "#fff", borderRadius: "10px", flexDirection: "column" }}>
-                    <Row style={{ width: "500px", height: "70px", alignItem: "center", justifyContent: "center", marginTop: "30px", }}>
-                        <text style={{ fontSize: 20, marginTop: '25px', color: "#9851c2", fontWeight: 'bold' }}>ADD PRODUCT</text>
-                    </Row>
 
 
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "20px", alignItem: "center", justifyContent: "center" }}>
-                        <TextField
-                            style={{ width: "300px", height: "20px", }}
+            <Modal 
+             show={modal}
+             centered
+             backdrop="static"
+            //  keyboard={false}
+             onHide={handleClose}>
+                <Modal.Header closeButton>
+                    {/* <Modal.Title>Modal heading</Modal.Title> */}
+                </Modal.Header>
+                <Modal.Body className="show-grid">
 
-                            label="Product Name"
-                            variant="outlined"
-                            value={values.product_name}
-                            onChange={(val) => setValues({ ...values, product_name: val.target.value })}
-                        />
-                    </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
-                        <TextField
-                            style={{ width: "300px", height: "20px", }}
-
-                            label="Input Data"
-                            variant="outlined"
-                            value={values.data1}
-                            onChange={(val) => setValues({ ...values, data1: val.target.value })}
-                        />
-                    </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
-                        <TextField
-                            style={{ width: "300px", height: "20px", }}
-
-                            label="Input Data"
-                            variant="outlined"
-                            value={values.data2}
-                            onChange={(val) => setValues({ ...values, data2: val.target.value })}
-                        />
-                    </Row>
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
-                        <TextField
-                            style={{ width: "300px", height: "20px", }}
-
-                            label="Input Data"
-                            variant="outlined"
-                            value={values.data3}
-                            onChange={(val) => setValues({ ...values, data3: val.target.value })}
-                        />
-                    </Row>
-
-                    <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "10px", marginBottom: "20px", alignItem: "center", justifyContent: "center" }}>
-                        <Button
-                            style={{
-                                width: "300px", height: "50px", backgroundColor: "#9851c2"
-                            }}
-                            onClick={on_submit}
-                        // color="#9851c2"
-                        >
-                            <text style={{ fontSize: 22 }}>SUBMIT</text>
-                        </Button>
-                    </Row>
+                    <Col style={{ height: "500px", width: "500px", backgroundColor: "#fff", borderRadius: "10px", flexDirection: "column" }}>
+                        <Row style={{ width: "500px", height: "70px", alignItem: "center", justifyContent: "center", }}>
+                            <text style={{ fontSize: 20, marginTop: '25px', color: "#9851c2", fontWeight: 'bold' }}>ADD PRODUCT</text>
+                        </Row>
 
 
-                </Col>
+                        <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "20px", alignItem: "center", justifyContent: "center" }}>
+                            <TextField
+                                style={{ width: "300px", height: "20px", }}
+
+                                label="Product Name"
+                                variant="outlined"
+                                value={values.product_name}
+                                onChange={(val) => setValues({ ...values, product_name: val.target.value })}
+                            />
+                        </Row>
+                        <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
+                            <TextField
+                                style={{ width: "300px", height: "20px", }}
+
+                                label="Input Data"
+                                variant="outlined"
+                                value={values.data1}
+                                onChange={(val) => setValues({ ...values, data1: val.target.value })}
+                            />
+                        </Row>
+                        <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
+                            <TextField
+                                style={{ width: "300px", height: "20px", }}
+
+                                label="Input Data"
+                                variant="outlined"
+                                value={values.data2}
+                                onChange={(val) => setValues({ ...values, data2: val.target.value })}
+                            />
+                        </Row>
+                        <Row style={{ width: "500px", height: "70px", textAlign: "center", alignItem: "center", justifyContent: "center" }}>
+                            <TextField
+                                style={{ width: "300px", height: "20px", }}
+
+                                label="Input Data"
+                                variant="outlined"
+                                value={values.data3}
+                                onChange={(val) => setValues({ ...values, data3: val.target.value })}
+                            />
+                        </Row>
+
+                        <Row style={{ width: "500px", height: "70px", textAlign: "center", marginTop: "10px", alignItem: "center", justifyContent: "center" }}>
+                            <Button
+                                style={{
+                                    width: "300px", height: "50px", backgroundColor: "#9851c2"
+                                }}
+                                onClick={on_submit}
+                            // color="#9851c2"
+                            >
+                                <text style={{ fontSize: 22 }}>SUBMIT</text>
+                            </Button>
+                        </Row>
+
+
+                    </Col>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+          </Button>
+                    {/* <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button> */}
+                </Modal.Footer>
             </Modal>
+           
             <Row style={{ width: "100%", marginLeft: "5px", marginTop: "10px", }}>
                 <div style={{ width: "71%", }} className="hotel-card">
                     <div style={{ marginTop: '1rem', marginLeft: '1rem', textAlign: "left" }}>
