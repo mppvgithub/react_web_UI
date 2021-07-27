@@ -202,7 +202,7 @@ header.content.top-sticky {
   padding-right: "500px";
   /* display: flex; */
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   border: 1px solid lightgrey;
   /* height: 650px; */
   /* width: 340px; */
@@ -252,6 +252,12 @@ header.content.top-sticky {
   border-radius: 5px;
   margin: 8px;
   box-shadow: 1px 1px 3px 1px rgba(211, 211, 211, 0.5);
+}
+.scrollmenu {
+  background-color: #333;
+  /* overflow: auto; */
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 @keyframes App-logo-spin {
