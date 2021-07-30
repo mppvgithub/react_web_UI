@@ -25,8 +25,8 @@ export default function SignUp() {
     });
 
     const [Login_values, setLogin_Values] = useState({
-        password: localStorage.getItem('loginPassword') || '',
-        email: localStorage.getItem('loginEmail') || '',
+        password: '',
+        email: '',
     });
     useEffect(() => {
         
@@ -48,16 +48,23 @@ export default function SignUp() {
         event.preventDefault();
     };
 
-    function on_login ()  {
+    const on_login = () =>  {
         // console.log("login clicked")
         // localStorage.setItem("loginEmail", Login_values.email)
         // localStorage.setItem("loginPassword", Login_values.password)
-        return (
-            <Redirect to={{
-                'pathname' : "/About",
-                'state' : ''
-            }} />
-        )
+        const loginData = {
+            email:Login_values.email,
+            password:Login_values.password
+        };
+        WebServiceRequest.callRestAPIPost({url:WebServiceRequest.BASE_URL_USER+"/login",data:loginData}).then((response)=>{
+            console.log(response);
+        })
+        // return (
+        //     <Redirect to={{
+        //         'pathname' : "/About",
+        //         'state' : ''
+        //     }} />
+        // )
 
     }
     function on_register() {
@@ -156,7 +163,7 @@ export default function SignUp() {
                                             width: "500px", height: "50px", backgroundColor: "#9851c2"
                                         }}
                                     >
-                                        <text style={{ fontSize: 22 }}>LogIn</text>
+                                        <text style={{ fontSize: 22 }}>Log In</text>
 
                                     </Button>
                                 </div>

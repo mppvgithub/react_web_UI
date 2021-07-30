@@ -27,7 +27,7 @@ let callRestAPIGet = ({
     params,
     timeout
   };
-  return WebServiceRequest.callWebService(options);
+  return callWebService(options);
 };
 
 let callRestAPIPost = ({
@@ -44,7 +44,7 @@ let callRestAPIPost = ({
     params,
     timeout
   };
-  return WebServiceRequest.callWebService(options);
+  return callWebService(options);
 };
 
 export const WebServiceRequest = {
